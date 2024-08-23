@@ -103,13 +103,21 @@ return `${score}文字打てました!\n${text}\n【OK】リトライ / 【キ�
 const gameOver = id => {
   clearInterval(id);
 
-  const result = confirm(rankCheck(score));
+  // ここを追加
+  // テキストを更新
+  untypedfield.style.display = 'none';
+  typedfield.textContent = 'タイムアップ！';
 
-  // OKボタンをクリックされたらリロードする
-  if(result == true) {
-  window.location.reload();
-  }
-};
+  // 少し遅延を入れてconfirmを表示（例:500ms後）
+  setTimeout(() => {
+    const result = confirm(rankCheck(score));
+    if(result == true) {
+      window.location.reload();
+      }
+     },500);
+    };
+  
+
 
 // カウントダウンタイマー
 const timer = () => {
